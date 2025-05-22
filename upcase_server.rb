@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'socket'
 
 BUFFER_SIZE = 1024
