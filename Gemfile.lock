@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    hexdump (1.0.1)
+
+PLATFORMS
+  arm64-darwin-24
+  ruby
+
+DEPENDENCIES
+  hexdump (~> 1.0)
+
+BUNDLED WITH
+   2.6.9
