@@ -7,7 +7,7 @@ IFINDEX_SIZE = 0x0004
 SIOCGIFINDEX = 0x8933
 
 def get_interface_index(interface_name)
-  socket = Socket.open(:PACKET, :RAW)
+  socket = Socket.open(:PF_INET, :RAW)
   ifreq = [interface_name].pack("a#{IFREQ_SIZE}")
 
   socket.ioctl(SIOCGIFINDEX, ifreq)
