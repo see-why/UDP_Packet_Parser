@@ -33,7 +33,7 @@ def start_server
       data = socket.recv(BUFFER_SIZE)
       puts "Packets received..."
       Hexdump.dump(data)
-      puts "Packets sent..."
+      puts "Packets processed..."
     end
   rescue => e
     puts "Error: #{e.message}"
