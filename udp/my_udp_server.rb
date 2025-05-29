@@ -25,7 +25,7 @@ def start_server
   puts "Note: This requires root privileges to run"
 
   begin
-    socket = bind_socket('eth0')
+    socket = bind_socket(ENV.fetch('NETWORK_INTERFACE', 'eth0'))
     puts "Server is ready to receive packets..."
     puts "Listening on Docker network interface..."
 
