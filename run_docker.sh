@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Create a custom network if it doesn't exist
+echo "Setting up custom network..."
+docker network create --driver bridge udp-network 2>/dev/null || true
+
 # Build the image
 echo "Building Docker image..."
 docker build -t udp-server .
@@ -8,5 +12,7 @@ docker build -t udp-server .
 echo "Starting container..."
 docker run --cap-add=NET_RAW \
            --cap-add=NET_ADMIN \
-           --network=host \
-           -it udp-server 
+           --network=udp-network \
+           --name udp-server-container \
+           -p 5000:5000/udp \
+           -it udp-server
