@@ -19,7 +19,6 @@ RUN gem install ruby-pcap hexdump
 # Copy the Ruby files
 COPY udp/my_udp_server.rb .
 COPY udp/get_interface_index.rb .
-COPY .env .
 
 # Run the server
 CMD ["ruby", "my_udp_server.rb"] 
