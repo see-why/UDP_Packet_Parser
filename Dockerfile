@@ -20,11 +20,5 @@ RUN gem install ruby-pcap hexdump
 COPY my_udp_server.rb .
 COPY get_interface_index.rb .
 
-# Create a non-root user
-RUN useradd -m udpuser
-
-# Switch to non-root user
-USER udpuser
-
 # Run the server
 CMD ["ruby", "my_udp_server.rb"] 
