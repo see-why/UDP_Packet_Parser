@@ -27,6 +27,7 @@ def start_server
   begin
     socket = bind_socket('eth0')
     puts "Server is ready to receive packets..."
+    puts "Listening on Docker network interface..."
 
     loop do
       data = socket.recv(BUFFER_SIZE)
