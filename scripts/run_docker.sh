@@ -17,6 +17,7 @@ echo "Starting container..."
 docker run --cap-add=NET_RAW \
            --cap-add=NET_ADMIN \
            --network=udp-network \
+           --env-file .env \
            --name udp-server-container \
            -p 5000:5000/udp \
            -it udp-server
