@@ -36,7 +36,7 @@ def start_server
       Hexdump.dump(data)
       puts "Packets processed..."
 
-      frame = EthernetFrameMnager.new(data)
+      frame = EthernetFrameManager.new(data)
 
       next unless frame.ip_packet_manager.protocol == UDP_PROTOCOL &&
         frame.ip_packet.udp_datagram.destination_port == 5000
