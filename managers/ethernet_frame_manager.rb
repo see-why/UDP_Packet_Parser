@@ -7,6 +7,10 @@ class EthernetFrameManager
     @bytes = bytes
   end
 
+  def ip_packet
+    IPPacketManager.new(bytes)
+  end
+
   def destination_mac
     format_mac(bytes[0, 6])
   end
