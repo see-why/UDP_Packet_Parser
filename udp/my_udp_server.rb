@@ -7,6 +7,7 @@ require_relative 'get_interface_index'
 BUFFER_SIZE = 1024
 ETH_P_ALL = 0x0300
 SOCKADDR_LL_SIZE = 0x0014
+UDP_PROTOCOL = 0x11
 
 def bind_socket(interface_name)
   socket, index = get_interface_index(interface_name)
@@ -34,6 +35,16 @@ def start_server
       puts "Packets received..."
       Hexdump.dump(data)
       puts "Packets processed..."
+
+      frame = EthernetFrameMnager.new(data)
+
+      next unless frame.ip_packet_manager.protocol == UDP_PROTOCOL &&
+        frame.ip_packet.udp_datagram.destination_port == 5000
+
+
+      puts "data: #{frame.ip_packet.udp_datagram.body.upcase}"
+      puts "source ip: #{frame.ip_packet.source_ip_address}"
+      puts "source port: #{frame.ip_packet.udp_datagram.source_port}"
     end
   rescue => e
     puts "Error: #{e.message}"
