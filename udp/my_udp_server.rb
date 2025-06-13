@@ -38,9 +38,8 @@ def start_server
 
       frame = EthernetFrameManager.new(data)
       protocol = frame.ip_packet_manager.protocol
-      puts "frame.ip_packet_manager.protocol: 0x#{protocol.ord.to_s(16).rjust(2, '0')}"
 
-      next unless protocol.ord == UDP_PROTOCOL &&
+      next unless protocol == UDP_PROTOCOL &&
         frame.ip_packet_manager.udp_datagram.destination_port == 5000
 
       puts "data: #{frame.ip_packet_manager.udp_datagram.body}"
