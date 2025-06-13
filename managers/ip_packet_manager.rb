@@ -10,7 +10,8 @@ class IPPacketManager
   end
 
   def udp_datagram
-    UDPDatagramManager.new(bytes.drop(20))
+    header_length = ihl * 4  # IHL is in 32-bit words
+    UDPDatagramManager.new(bytes.bytes.drop(header_length))
   end
 
   def version
