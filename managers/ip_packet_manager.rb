@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'udp_datagram_manager'
+
 class IPPacketManager
   attr_reader :bytes
 
@@ -7,19 +9,29 @@ class IPPacketManager
     @bytes = bytes
   end
 
+  def udp_datagram
+    UDPDatagramManager.new(bytes.drop(20))
+  end
+
   def version
-    bytes[0] >> 4
+    bytes[0].ord >> 4
   end
 
   def ihl
-    bytes[0] & 0xF
+    bytes[0].ord & 0xF
   end
 
   def protocol
-    bytes[9]  # Protocol field is at offset 9 in IPv4 header
+    bytes[9].ord  # Protocol field is at offset 9 in IPv4 header
   end
 
   def source_ip_address
-    bytes[14, 4].join('.')
+    bytes[12, 4].bytes.join('.')
+  end
+
+  private
+
+  def word16(a, b)
+    (a << 8) | b
   end
 end
