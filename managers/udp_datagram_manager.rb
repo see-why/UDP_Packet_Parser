@@ -28,6 +28,6 @@ class UDPDatagramManager
   end
 
   def body
-     bytes[8, (length - 8)].pack('C*').force_encoding('UTF-8')
+     bytes[8, (length - 8)].pack('C*')
   end
 end
