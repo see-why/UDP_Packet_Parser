@@ -36,6 +36,11 @@ def start_server
       puts "\nPackets received..."
       Hexdump.dump(data)
 
+      # Extract the EtherType field (bytes 12-13 of the Ethernet frame)
+      ether_type = data[12..13].unpack1('n')
+
+      # Only process IPv4 frames (EtherType 0x0800)
+      next unless ether_type == 0x0800
       frame = EthernetFrameManager.new(data)
       protocol = frame.ip_packet_manager.protocol
 
