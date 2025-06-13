@@ -33,19 +33,19 @@ def start_server
 
     loop do
       data = socket.recv(BUFFER_SIZE)
-      puts "Packets received..."
+      puts "\nPackets received..."
       Hexdump.dump(data)
-      puts "Packets processed..."
 
       frame = EthernetFrameManager.new(data)
+      protocol = frame.ip_packet_manager.protocol
+      puts "frame.ip_packet_manager.protocol: 0x#{protocol.ord.to_s(16).rjust(2, '0')}"
 
-      next unless frame.ip_packet_manager.protocol == UDP_PROTOCOL &&
+      next unless protocol.ord == UDP_PROTOCOL &&
         frame.ip_packet.udp_datagram.destination_port == 5000
 
-
-      puts "data: #{frame.ip_packet.udp_datagram.body.upcase}"
-      puts "source ip: #{frame.ip_packet.source_ip_address}"
-      puts "source port: #{frame.ip_packet.udp_datagram.source_port}"
+      puts "data: #{frame.ip_packet_manager.udp_datagram.body.upcase}"
+      puts "source ip: #{frame.ip_packet_manager.source_ip_address}"
+      puts "source port: #{frame.ip_packet_manager.udp_datagram.source_port}"
     end
   rescue => e
     puts "Error: #{e.message}"
