@@ -53,7 +53,7 @@ echo "Test packet" | nc -u localhost 5000
 Or use the provided Python script:
 
 ```bash
-python3 udp/send_udp.py
+python3 scripts/send_udp.py
 ```
 
 ## Troubleshooting
