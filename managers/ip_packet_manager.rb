@@ -16,7 +16,7 @@ class IPPacketManager
   end
 
   def protocol
-    bytes[9]
+    bytes[9]  # Protocol field is at offset 9 in IPv4 header
   end
 
   def source_ip_address
