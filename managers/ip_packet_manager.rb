@@ -31,8 +31,4 @@ class IPPacketManager
   end
 
   private
-
-  def word16(a, b)
-    (a << 8) | b
-  end
 end
