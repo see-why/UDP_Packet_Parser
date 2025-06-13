@@ -3,6 +3,7 @@
 require 'pcap'
 require 'hexdump'
 require_relative 'get_interface_index'
+require_relative '../managers/ethernet_frame_manager'
 
 BUFFER_SIZE = 1024
 ETH_P_ALL = 0x0300
