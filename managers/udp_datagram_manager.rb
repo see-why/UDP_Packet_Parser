@@ -8,19 +8,19 @@ class UDPDatagramManager
   end
 
   def source_port
-    word16(bytes[0].ord, bytes[1].ord)
+    word16(bytes[0], bytes[1])
   end
 
   def destination_port
-    word16(bytes[2].ord, bytes[3].ord)
+    word16(bytes[2], bytes[3])
   end
 
   def length
-    word16(bytes[4].ord, bytes[5].ord)
+    word16(bytes[4], bytes[5])
   end
 
   def checksum
-    word16(bytes[6].ord, bytes[7].ord)
+    word16(bytes[6], bytes[7])
   end
 
   def word16(a, b)
