@@ -15,15 +15,15 @@ class IPPacketManager
   end
 
   def version
-    bytes[0].ord >> 4
+    bytes.getbyte(0) >> 4
   end
 
   def ihl
-    bytes[0].ord & 0xF
+    bytes.getbyte(0) & 0xF
   end
 
   def protocol
-    bytes[9].ord # Protocol field is at offset 9 in IPv4 header
+    bytes.getbyte(9) # Protocol field is at offset 9 in IPv4 header
   end
 
   def source_ip_address
