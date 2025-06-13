@@ -41,9 +41,9 @@ def start_server
       puts "frame.ip_packet_manager.protocol: 0x#{protocol.ord.to_s(16).rjust(2, '0')}"
 
       next unless protocol.ord == UDP_PROTOCOL &&
-        frame.ip_packet.udp_datagram.destination_port == 5000
+        frame.ip_packet_manager.udp_datagram.destination_port == 5000
 
-      puts "data: #{frame.ip_packet_manager.udp_datagram.body.upcase}"
+      puts "data: #{frame.ip_packet_manager.udp_datagram.body}"
       puts "source ip: #{frame.ip_packet_manager.source_ip_address}"
       puts "source port: #{frame.ip_packet_manager.udp_datagram.source_port}"
     end
