@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install -y \
 # Install Ruby gems
 RUN gem install ruby-pcap hexdump
 
-# Copy the Ruby files
-COPY udp/my_udp_server.rb .
-COPY udp/get_interface_index.rb .
+# Copy the Ruby files maintaining directory structure
+COPY udp/ ./udp/
+COPY managers/ ./managers/
 
 # Run the server
-CMD ["ruby", "my_udp_server.rb"] 
+CMD ["ruby", "udp/my_udp_server.rb"] 
