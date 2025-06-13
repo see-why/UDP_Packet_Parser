@@ -24,10 +24,10 @@ class UDPDatagramManager
   end
 
   def word16(a, b)
-    (a << 8) | b  # Use bitwise OR to combine the bytes
+    (a << 8) | b # Use bitwise OR to combine the bytes
   end
 
   def body
-     bytes[8, (length - 8)].pack('C*')
+    bytes[8, (length - 8)].pack('C*')
   end
 end

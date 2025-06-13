@@ -10,7 +10,7 @@ class IPPacketManager
   end
 
   def udp_datagram
-    header_length = ihl * 4  # IHL is in 32-bit words
+    header_length = ihl * 4 # IHL is in 32-bit words
     UDPDatagramManager.new(bytes.bytes.drop(header_length))
   end
 
@@ -23,12 +23,10 @@ class IPPacketManager
   end
 
   def protocol
-    bytes[9].ord  # Protocol field is at offset 9 in IPv4 header
+    bytes[9].ord # Protocol field is at offset 9 in IPv4 header
   end
 
   def source_ip_address
     bytes[12, 4].bytes.join('.')
   end
-
-  private
 end
