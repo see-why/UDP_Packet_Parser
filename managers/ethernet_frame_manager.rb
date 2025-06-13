@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'ip_packet_manager'
+
 class EthernetFrameManager
   attr_reader :bytes
 
@@ -9,7 +10,7 @@ class EthernetFrameManager
   end
 
   def ip_packet_manager
-    IPPacketManager.new(bytes[14...-4])
+    IPPacketManager.new(bytes[14..])
   end
 
   def destination_mac
@@ -21,19 +22,12 @@ class EthernetFrameManager
   end
 
   def ether_type
-    format_mac(bytes[12, 2])
+    (bytes[12].ord << 8 | bytes[13].ord).to_s(16).rjust(4, '0').upcase
   end
 
   private
 
   def format_mac(mac_bytes)
-    mac_bytes.map do |byte|
-      byte.to_s(16).rjust(2, '0')
-    end.join(':').upcase
-  end
-
-  def data
-    # Drop the first 14 bytes (MAC Header) and last 4 bytes (CRC Checksum)
-    IPPacket.new(bytes[14...-4])
+    mac_bytes.map { |byte| byte.to_s(16).rjust(2, '0') }.join(':').upcase
   end
 end
