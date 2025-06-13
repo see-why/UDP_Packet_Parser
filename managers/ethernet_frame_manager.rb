@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'ip_packet_manager'
 class EthernetFrameManager
   attr_reader :bytes
 
@@ -7,8 +8,8 @@ class EthernetFrameManager
     @bytes = bytes
   end
 
-  def ip_packet
-    IPPacketManager.new(bytes)
+  def ip_packet_manager
+    IPPacketManager.new(bytes[14...-4])
   end
 
   def destination_mac
