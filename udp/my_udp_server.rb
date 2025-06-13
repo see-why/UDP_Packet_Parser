@@ -5,7 +5,7 @@ require 'hexdump'
 require_relative 'get_interface_index'
 require_relative '../managers/ethernet_frame_manager'
 
-BUFFER_SIZE = 1024
+BUFFER_SIZE = 65535
 ETH_P_ALL = 0x0300
 SOCKADDR_LL_SIZE = 0x0014
 UDP_PROTOCOL = 0x11
