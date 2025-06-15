@@ -52,7 +52,7 @@ def start_server
       puts "source ip: #{frame.ip_packet_manager.source_ip_address}"
       puts "source port: #{frame.ip_packet_manager.udp_datagram.source_port}"
 
-      UdpSocketManager.new(
+      UdpSocketManager.new.send(
         frame.ip_packet_manager.udp_datagram.body.upcase,
         0,
         frame.ip_packet_manager.source_ip_address,
