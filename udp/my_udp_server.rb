@@ -4,6 +4,7 @@ require 'pcap'
 require 'hexdump'
 require_relative 'get_interface_index'
 require_relative '../managers/ethernet_frame_manager'
+require_relative '../managers/udp_socket_manager'
 
 BUFFER_SIZE = 65_535
 ETH_P_ALL = 0x0300
@@ -50,6 +51,13 @@ def start_server
       puts "data: #{frame.ip_packet_manager.udp_datagram.body}"
       puts "source ip: #{frame.ip_packet_manager.source_ip_address}"
       puts "source port: #{frame.ip_packet_manager.udp_datagram.source_port}"
+
+      UdpSocketManager.new(
+        frame.ip_packet_manager.udp_datagram.body.upcase,
+        0,
+        frame.ip_packet_manager.source_ip_address,
+        frame.ip_packet_manager.udp_datagram.source_port
+      )
     end
   rescue StandardError => e
     puts "Error: #{e.message}"
