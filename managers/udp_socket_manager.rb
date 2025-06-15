@@ -7,7 +7,7 @@ class UdpSocketManager
     @socket = Socket.new(Socket::AF_INET, Socket::SOCK_RAW, Socket::IPPROTO_RAW)
   end
 
-  def send(data, _offset, dest_ip, dest_port, source_ip: '192.168.1.100', source_port: 5000)
+  def send(data, _offset, dest_ip, dest_port, source_ip: env.FETCH(SOURCE_IP, '192.168.1.100'), source_port: env.FETCH(SOURCE_PORT, '5000'))
     udp_header = build_udp_header(data.bytesize, source_port, dest_port)
     ip_header = build_ip_header(data.bytesize + udp_header.bytesize, source_ip, dest_ip)
 
