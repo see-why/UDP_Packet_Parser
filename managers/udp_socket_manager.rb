@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 require 'socket'
+require 'ipaddr'
 
 class UdpSocketManager
   def initialize
     @socket = Socket.new(Socket::AF_INET, Socket::SOCK_RAW, Socket::IPPROTO_RAW)
   end
 
-  def send(data, _offset, dest_ip, dest_port, source_ip: env.FETCH(SOURCE_IP, '192.168.1.100'), source_port: env.FETCH(SOURCE_PORT, '5000'))
+  def send(data, _offset, dest_ip, dest_port, source_ip: ENV.fetch('SOURCE_IP', '192.168.1.100'), source_port: ENV.fetch('SOURCE_PORT', '5000'))
+    # Convert source_port to integer
+    source_port = source_port.to_i
+    dest_port = dest_port.to_i
+
     udp_header = build_udp_header(data.bytesize, source_port, dest_port)
     ip_header = build_ip_header(data.bytesize + udp_header.bytesize, source_ip, dest_ip)
 
