@@ -58,6 +58,8 @@ def start_server
         frame.ip_packet_manager.source_ip_address,
         frame.ip_packet_manager.udp_datagram.source_port
       )
+
+      puts "********** Packets sent **********"
     end
   rescue StandardError => e
     puts "Error: #{e.message}"
