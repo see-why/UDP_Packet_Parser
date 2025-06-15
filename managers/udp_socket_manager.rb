@@ -10,7 +10,7 @@ class UdpSocketManager
     @socket.setsockopt(Socket::IPPROTO_IP, Socket::IP_HDRINCL, 1)
   end
 
-  def send_packet(data, _offset, dest_ip, dest_port, source_ip: ENV.fetch('SOURCE_IP', '192.168.1.100'), source_port: ENV.fetch('SOURCE_PORT', '5000'))
+  def send_packet(data, offset, dest_ip, dest_port, source_ip: ENV.fetch('SOURCE_IP', '192.168.1.100'), source_port: ENV.fetch('SOURCE_PORT', '5000'))
     # Convert source_port to integer
     source_port = source_port.to_i
     dest_port = dest_port.to_i
@@ -21,7 +21,7 @@ class UdpSocketManager
 
     # Send to the original sender
     sockaddr = Socket.sockaddr_in(dest_port, dest_ip)
-    @socket.send(ip_packet, 0, sockaddr)
+    @socket.send(ip_packet, offset, sockaddr)
   end
 
   private
