@@ -49,7 +49,7 @@ class UdpSocketManager
     version_ihl = (4 << 4) + 5
     tos = 0
     total_length = 20 + udp_segment.bytesize
-    id = 54321
+    id = rand(0..65535)
     flags_offset = 0
     ttl = 64
     protocol = Socket::IPPROTO_UDP
