@@ -2,6 +2,8 @@
 
 A Ruby-based UDP packet capture server that uses raw sockets to capture and display network packets.
 
+![Preview](https://res.cloudinary.com/dj7y9zirl/image/upload/v1750254417/udp_packet_parser.png)
+
 ## Prerequisites
 
 - Docker
@@ -60,7 +62,7 @@ echo -n "Test packet" | nc -u localhost 5000
 Or use the provided Python script:
 
 ```bash
-python3 scripts/send_udp.py
+python3 scripts/send_udp.py "text"
 ```
 
 ## Packet Structure
